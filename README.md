@@ -2,7 +2,7 @@
 
 <div>
 <p>Entity Relationship Diagram With dbdiagram.io</p>
-<img width="960" alt="Screenshot 2023-03-22 212522" src="https://user-images.githubusercontent.com/90021411/226935332-888f7dbd-2873-4ea3-ac2e-c5bfa5980978.png">
+<img width="960" alt="Screenshot 2023-03-22 215527" src="https://user-images.githubusercontent.com/90021411/226944686-3451e817-d620-4440-9066-017b49b2bd9c.png">
 </div>
 
 <div>
