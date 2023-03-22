@@ -1,6 +1,8 @@
 const express = require("express");
 const Mobils = require("./mobil");
+const bodyParser = require('body-parser')
 const app = express();
+const jsonParser = bodyParser.json()
 const PORT = process.env.PORT || 8000;
 
 app.use(express.static("public"));
@@ -22,7 +24,7 @@ app.get('/api/v1/mobil', async (req, res) => {
   
 })
 //create
-app.post('/api/v1/mobil', async (req, res) => {
+app.post('/api/v1/mobil', jsonParser, async (req, res) => {
   try {
     const mobil = await Mobils.create(req.body);
     res.status(201).json({
@@ -83,12 +85,22 @@ app.delete('/api/v1/mobil/:id', async (req, res) => {
 })
 
 //with ejs
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/", async (req, res) => {
+  let data = []
+    try {
+        const mobil = await Mobils.list(req.body);
+        data = mobil
+    } catch (error) {
+        console.log(error)
+    }
+    
+    res.render("index", {
+        data:data
+    })
 });
 
 app.get("/list-cars", (req, res) => {
-  res.render("car-information");
+ res.render("car-information");
 });
 
 app.use((req, res) => {

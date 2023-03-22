@@ -213,19 +213,26 @@
                 <div class="form-group row">
                   <label for="inputText" class="col-sm-2 col-form-label">Sewa Per Hari</label>
                   <div class="col-sm-6">
-                    <input type="numbe" class="form-control" id="inputSewa" placeholder="Rp. 0.-">
+                    <input type="number" class="form-control" id="inputSewa" placeholder="Rp. 0.-">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputSize" class="col-sm-2 col-form-label">Ukuran</label>
                   <div class="col-sm-6">
                     <select class="form-control" id="inputSize">
-                      <option value="small" selected>Small</option>
-                      <option value="medium">Medium</option>
-                      <option value="large">Large</option>
+                      <option value="Small" selected>Small</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Large">Large</option>
                     </select>
                   </div>
                 </div>
+                <div class="form-group row">
+                  <label for="inputFoto" class="col-sm-2 col-form-label">Foto</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" id="inputFoto" placeholder="Foto">
+                  </div>
+                </div>
+                <!-- 
                 <div class="form-group row">
                   <label for="inputfile" class="col-sm-2 col-form-label">Sewa Per hari</label>
                   <div class="col-sm-6">
@@ -236,11 +243,11 @@
                     <p>File Size Max 2mb</p>
                     
                   </div>
-                </div>
+                </div> -->
                 <a href="/">
                 <button type="button" class="btn btn-danger btn-flat float-left mr-2">Cancel</button>
                 </a>
-                <button type="submit" class="btn btn-info btn-flat">Save</button>              
+                <button id="buttonInsert" type="submit" class="btn btn-info btn-flat" onclick=handleInsertMenu()>Save</button>              
               </div>
 
             </form>
@@ -280,5 +287,32 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+
+<script>
+
+  const handleInsertMenu = async () => {
+    const inputNama = document.getElementById("inputNama")
+    const inputSewa = document.getElementById("inputSewa")
+    const inputSize = document.getElementById("inputSize")
+    const inputFoto = document.getElementById("inputFoto")
+  
+    const resp = await fetch('http://localhost:8000/api/v1/mobil', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        nama_mobil: inputNama.value,
+        sewa: inputSewa.value,
+        ukuran: inputSize.value,
+        foto: inputFoto.value
+      })
+    })
+    window.location("/")
+    // location.reload()
+  }
+  
+</script>
+
 </body>
 </html>

@@ -230,49 +230,43 @@
     <section class="content">
 
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-4 col-sm-6 col-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Messages</span>
-                <span class="info-box-number">1,410</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-4 col-sm-6 col-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Bookmarks</span>
-                <span class="info-box-number">410</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-4 col-sm-6 col-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Uploads</span>
-                <span class="info-box-number">13,648</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          
+        <% if(data.length > 0){ %>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama Mobil</th>
+              <th>Sewa Per Hari</th>
+              <th>Size</th>
+              <th>Foto</th>
+              <th>Aksi</th>
+              <!-- <th style="width: 10px">#</th>
+              <th>Task</th>
+              <th>Progress</th>
+              <th style="width: 40px">Label</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <% data.forEach((e, i) => { %>
+                <tr>
+                    <td><%= i + 1 %></td>
+                    <td><%= e.nama_mobil %></td>
+                    <td><%= e.sewa %></td>
+                    <td><%= e.ukuran %></td>
+                    <td ><img class="img-size-50" src="<%= e.foto %>"/></td>
+                    <td>
+                      <button type="button" class="btn btn-primary">Edit</button>
+                      <button type="button" class="btn btn-danger" onclick="handleDelete('<%= e.id %>')">Delete</button>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+        </table>
+        <% } else{ %>  
+          <p>no data</p>
+        <% } %>
+         
         </div>
-      </div>
     </section>
     <!-- /.content -->
 
@@ -304,5 +298,19 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script>
+  const handleDelete = async (id) => {
+  if (confirm('Apakah Yakin Ingin Menghapus Data?') == true){
+    const resp = await fetch(`http://localhost:8000/api/v1/mobil/${id}`, {
+    method: 'DELETE',
+  })
+  location.reload()
+  } else {
+  
+  }
+  
+}
+</script>
+
 </body>
 </html>
