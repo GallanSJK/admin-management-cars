@@ -7,6 +7,7 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs')
 app.use(express.json())
 
+//endpoint API sequelize
 //list
 app.get('/api/v1/mobil', async (req, res) => {
   try {
@@ -80,24 +81,6 @@ app.delete('/api/v1/mobil/:id', async (req, res) => {
     })
   }
 })
-
-// app.delete("/api/v1/mobil/:id", async (req, res) => {
-//   const mobil = await Mobils.find(req.params.id);
-
-//   Mobils.delete(mobil, (err, data) => {
-//     if (err) {
-//       return res.status(500).json();
-//     } else {
-//       if (data) {
-//         return res.json(data);
-//       } else {
-//         return res.status(400).send("Document not found, check id");
-//       }
-//     }
-//   });
-// })
-
-
 
 //with ejs
 app.get("/", (req, res) => {
