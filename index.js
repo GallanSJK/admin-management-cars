@@ -103,6 +103,10 @@ app.get("/list-cars", (req, res) => {
  res.render("car-information");
 });
 
+app.get("/edit-cars", (req, res) => {
+  res.render("car-edit");
+ });
+
 app.use((req, res) => {
   res.send("Mau kemana bos?");
 });
