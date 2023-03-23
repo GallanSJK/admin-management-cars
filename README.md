@@ -9,6 +9,7 @@
 <h2>Link Untuk Masing Masing Halaman</h2>
 <p>1. Link Untuk Melihat List Cars : <a href="http://localhost:8000/">http://localhost:8000/</a></p>
 <p>2. Link Untuk Mengakases Tambah Data Mobil : <a href="http://localhost:8000/list-cars">http://localhost:8000/list-cars</a></p>
+<p>3. Link Untuk Mengakases Edit Data Mobil : <a href="http://localhost:8000/edit-cars">http://localhost:8000/edit-cars</a></p>
 </div>
 
 <div>
