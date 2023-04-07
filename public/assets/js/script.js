@@ -13,7 +13,7 @@ async function init() {
     fetch("http://localhost:8000/api/v1/mobils")
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         data.forEach((el, i) => {
           html += `<table class="table table-bordered">
                         <thead>
@@ -112,8 +112,46 @@ function handleAdd(e) {
       );
 
       setTimeout(() => {
-        window.location.href = "http://localhost:8000";
+        window.location.href = "http://localhost:8000/list";
       }, 2000);
+    });
+
+  e.preventDefault();
+}
+
+function handleRegist(e) {
+  const inputFN = document.getElementById("inputFN");
+  const inputLN = document.getElementById("inputLN");
+  const inputEmail = document.getElementById("inputEmail");
+  const inputPassword = document.getElementById("inputPassword");
+
+  fetch("http://localhost:8000/api/v1/register", {
+    headers: { "Content-Type": "application/json" },
+    method: "post",
+    body: JSON.stringify({
+      firstName: inputFN.value,
+      lastName: inputLN.value,
+      email: inputEmail.value,
+      password: inputPassword.value,
+    }),
+  })
+    .then(function (res) {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+      document.body.insertAdjacentHTML(
+        "afterbegin",
+        `
+                <div class="alert alert-primary" role="alert">
+                    ${res}, halaman akan kembali ke home!
+                </div>
+            `
+      );
+
+      setTimeout(() => {
+        window.location.href = "http://localhost:8000/";
+      }, 200000);
     });
 
   e.preventDefault();
@@ -144,7 +182,7 @@ function handleEdit(e) {
   //   return;
   // }
 
-  fetch("http://localhost:8000/api/v1/mobils/" + id, {
+  fetch("http://localhost:8000/api/v1/mobils/" + id.value, {
     headers: { "Content-Type": "application/json" },
     method: "put",
     body: JSON.stringify({
@@ -170,7 +208,7 @@ function handleEdit(e) {
       );
 
       setTimeout(() => {
-        window.location.href = "http://localhost:8000";
+        window.location.href = "http://localhost:8000/list";
       }, 2000);
     });
 
@@ -184,7 +222,7 @@ async function handleDelete(id) {
     });
 
     setTimeout(() => {
-      window.location.href = "http://localhost:8000";
+      window.location.href = "http://localhost:8000/list";
     }, 2000);
   } else {
   }
@@ -198,13 +236,11 @@ async function onEdit() {
     .then((data) => {
       console.log(data);
       if (data) {
-        data.forEach((el) => {
-          document.getElementById("id").value = id;
-          document.getElementById("inputNama").value = el.nama;
-          document.getElementById("inputSewa").value = el.sewa;
-          document.getElementById("inputSize").value = el.ukuran;
-          document.getElementById("inputFoto").value = el.foto;
-        });
+        document.getElementById("id").value = id;
+        document.getElementById("inputNama").value = data.nama_mobil;
+        document.getElementById("inputSewa").value = data.sewa;
+        document.getElementById("inputSize").value = data.ukuran;
+        document.getElementById("inputFoto").value = data.foto;
       }
     });
 }

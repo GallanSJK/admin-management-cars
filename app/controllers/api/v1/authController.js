@@ -47,7 +47,7 @@ module.exports = {
   },
 
   async register(req, res) {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, role, password } = req.body;
 
     const encryptedPassword = await encryptPassword(password);
     try {
@@ -55,7 +55,7 @@ module.exports = {
         firstName,
         lastName,
         email,
-        role: "user",
+        role,
         password: encryptedPassword,
       });
       return res.status(201).json({
@@ -86,6 +86,7 @@ module.exports = {
       req.user = await User.findByPk(tokenPayload.id);
       next();
     } catch (e) {
+      console.log(e);
       res.status(401).json({
         message: "Unauthorized",
       });

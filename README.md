@@ -7,95 +7,71 @@
 
 <div>
 <h2>Link Untuk Masing Masing Halaman</h2>
-<p>1. Link Untuk Melihat List Cars : <a href="http://localhost:8000/">http://localhost:8000/</a></p>
-<p>2. Link Untuk Mengakases Tambah Data Mobil : <a href="http://localhost:8000/list-cars">http://localhost:8000/list-cars</a></p>
-<p>3. Link Untuk Mengakases Edit Data Mobil : <a href="http://localhost:8000/edit-cars">http://localhost:8000/edit-cars</a></p>
+<p>1. Link Untuk Login : <a href="http://localhost:8000/">http://localhost:8000/</a></p>
+<p>1. Link Untuk Register : <a href="http://localhost:8000/register">http://localhost:8000/register</a></p>
+<p>2. Link Untuk Melihat Data Mobil : <a href="http://localhost:8000/list">http://localhost:8000/list</a></p>
+<p>2. Link Untuk Menambah Data Mobil : <a href="http://localhost:8000/add">http://localhost:8000/add</a></p>
+<p>3. Link Untuk Mengakases Edit Data Mobil : <a href="http://localhost:8000/update">http://localhost:8000/update</a></p>
 </div>
 
 <div>
-<h2>End Point dari REST API Sequelieze dan sql (menggunakan body parser)</h2>
+<h2>End Point dari REST API Sequelieze</h2>
+<p><b>=> Dokumentasi API Menggunakan swagger</b></p>
+<p>
+apiRouter.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+</p>
+
+<p><b>=> Menambahkan Data User</b></p>
+<p>
+apiRouter.post("/api/v1/register", controllers.api.v1.authController.register);
+</p>
+
+<p><b>=> Melakukan Login</b></p>
+<p>
+apiRouter.post("/api/v1/login", controllers.api.v1.authController.login);
+</p>
+
+<p><b>=> Mengecek Data User Menggunakan Token</b></p>
+<p>
+apiRouter.get(
+  "/api/v1/whoami",
+  controllers.api.v1.authController.authorize,
+  controllers.api.v1.authController.whoami
+);
+</p>
+
 <p><b>=> Menampilkan Semua List Mobil</b></p>
 <p>
-app.get('/api/v1/mobil', async (req, res) => {
-  try {
-    const mobil = await Mobils.list();
-    res.status(200).json(mobil)
-  } catch (error) {
-    res.status(400).json({
-      message: "Error",
-      data: error
-    })
-  }
-  
-})</p>
+apiRouter.get("/api/v1/mobils", controllers.api.v1.mobilController.list);
+</p>
 
 <p><b>=> Menampilkan List Mobil By Id</b></p>
 <p>
-app.get('/api/v1/mobil/:id', async (req, res) => {
-  try {
-    const mobil = await Mobils.find(req.params.id);
-    if(!mobil) res.status(404).json({
-        error: "Mobil Tidak Ditemukan"
-    })  
-    res.status(200).json(mobil)
-  } catch (error) {
-    res.status(400).json({
-      message: "Error",
-      data: error
-    })
-  }
-})</p>
+apiRouter.get(
+  "/api/v1/mobils/:id",
+  controllers.api.v1.mobilController.setMobil,
+  controllers.api.v1.mobilController.show
+);</p>
 
-<p><b>=> Menampilkan Data Mobil Menggunakan body-parser (dapat digunakan dipostman)</b></p>
+<p><b>=> Menambahkan Data Mobil</b></p>
 <p>
-app.post('/api/v1/mobil', jsonParser, async (req, res) => {
-  try {
-    const mobil = await Mobils.create(req.body);
-    res.status(201).json({
-    message: "Sukses",
-    data: mobil
-  })
-  } catch (error) {
-    res.status(400).json({
-      message: "Error",
-      data: error
-    })
-  }
-})</p>
+apiRouter.post("/api/v1/mobils", controllers.api.v1.mobilController.create);
+</p>
 
 <p><b>=> Mengedit Data Mobil</b></p>
 <p>
-app.post('/api/v1/mobil/:id', async (req, res) => {
-  try {
-    const mobil = await Mobils.update(req.params.id, req.body);
-    if(!mobil) res.status(404).json({
-        error: "Mobil Tidak Ditemukan"
-    })  
-    res.status(200).json(mobil)
-  } catch (error) {
-    res.status(400).json({
-      message: "Error",
-      data: error
-    })
-  }
-})</p>
+apiRouter.put(
+  "/api/v1/mobils/:id",
+  controllers.api.v1.mobilController.setMobil,
+  controllers.api.v1.mobilController.update
+);</p>
 
 <p><b>=> Menghapus Data Mobil</b></p>
 <p>
-app.delete('/api/v1/mobil/:id', async (req, res) => {
-  try {
-    const mobil = await Mobils.delete(req.params.id);
-    if(!mobil) res.status(404).json({
-        error: "Mobil Tidak Ditemukan"
-    })
-    res.status(204).end();
-  } catch (error) {
-    res.status(400).json({
-      message: "Error",
-      data: error
-    })
-  }
-})</p>
-
+apiRouter.delete(
+  "/api/v1/mobils/:id",
+  controllers.api.v1.mobilController.setMobil,
+  controllers.api.v1.mobilController.destroy
+);</p>
 
 </div>

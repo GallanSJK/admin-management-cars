@@ -5,12 +5,6 @@ module.exports = {
     Mobil.findAll()
       .then((mobils) => {
         res.status(200).json(mobils);
-        // res.status(200).json({
-        //   status: "OK",
-        //   data: {
-        //     mobils,
-        //   },
-        // });
       })
       .catch((err) => {
         res.status(400).json({
@@ -27,10 +21,6 @@ module.exports = {
           status: "OK",
           data: mobil,
         });
-        // res.status(201).json({
-        //   status: "OK",
-        //   data: mobil,
-        // });
       })
       .catch((err) => {
         res.status(201).json({
@@ -62,10 +52,7 @@ module.exports = {
   show(req, res) {
     const mobil = req.mobil;
 
-    res.status(200).json({
-      status: "OK",
-      data: mobil,
-    });
+    res.status(200).json(mobil);
   },
 
   destroy(req, res) {
@@ -104,4 +91,31 @@ module.exports = {
         });
       });
   },
+
+  // getMobil(req, res, next) {
+  //   Mobil.findAll({
+  //     where: {
+  //       id: req.params.id,
+  //     },
+  //   })
+  //     .then((mobil) => {
+  //       if (!mobil) {
+  //         res.status(404).json({
+  //           status: "FAIL",
+  //           message: "Mobil not found!",
+  //         });
+
+  //         return;
+  //       }
+
+  //       req.mobil = mobil;
+  //       next();
+  //     })
+  //     .catch((err) => {
+  //       res.status(404).json({
+  //         status: "FAIL",
+  //         message: err.message,
+  //       });
+  //     });
+  // },
 };
