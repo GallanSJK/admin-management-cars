@@ -8,10 +8,11 @@
 <div>
 <h2>Link Untuk Masing Masing Halaman</h2>
 <p>1. Link Untuk Login : <a href="http://localhost:8000/">http://localhost:8000/</a></p>
-<p>1. Link Untuk Register : <a href="http://localhost:8000/register">http://localhost:8000/register</a></p>
-<p>2. Link Untuk Melihat Data Mobil : <a href="http://localhost:8000/list">http://localhost:8000/list</a></p>
-<p>2. Link Untuk Menambah Data Mobil : <a href="http://localhost:8000/add">http://localhost:8000/add</a></p>
-<p>3. Link Untuk Mengakases Edit Data Mobil : <a href="http://localhost:8000/update">http://localhost:8000/update</a></p>
+<p>email : user@gmail.com || password : user123</p>
+<p>2. Link Untuk Register : <a href="http://localhost:8000/register">http://localhost:8000/register</a></p>
+<p>3. Link Untuk Melihat Data Mobil : <a href="http://localhost:8000/list">http://localhost:8000/list</a></p>
+<p>4. Link Untuk Menambah Data Mobil : <a href="http://localhost:8000/add">http://localhost:8000/add</a></p>
+<p>5. Link Untuk Mengakases Edit Data Mobil : <a href="http://localhost:8000/update">http://localhost:8000/update</a></p>
 </div>
 
 <div>
