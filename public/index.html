@@ -30,9 +30,14 @@
         <div class="card-body">
           <p class="login-box-msg">Sign in to start your session</p>
 
-          <form action="/list" method="get">
+          <form id="add" method="post" onsubmit="handleLogin(event, this)">
             <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Email" />
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                id="email"
+              />
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -44,6 +49,7 @@
                 type="password"
                 class="form-control"
                 placeholder="Password"
+                id="password"
               />
               <div class="input-group-append">
                 <div class="input-group-text">
@@ -91,6 +97,7 @@
     </div>
     <!-- /.login-box -->
 
+    <script src="/assets/js/script.js"></script>
     <!-- jQuery -->
     <script src="/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->

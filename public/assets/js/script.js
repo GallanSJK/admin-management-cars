@@ -1,5 +1,6 @@
 const app = document.getElementById("app");
 const update = document.getElementById("update");
+const register = document.getElementById("register");
 const fileForm = document.getElementById("file");
 const render = (el, html) => {
   el.innerHTML = html;
@@ -166,6 +167,40 @@ function handleRegist(e) {
       setTimeout(() => {
         window.location.href = "http://localhost:8000/";
       }, 200000);
+    });
+
+  e.preventDefault();
+}
+
+function handleLogin(e) {
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+
+  fetch("http://localhost:8000/api/v1/login", {
+    headers: { "Content-Type": "application/json" },
+    method: "post",
+    body: JSON.stringify({
+      email: email.value,
+      password: password.value,
+    }),
+  })
+    .then(function (res) {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+      document.body.insertAdjacentHTML(
+        "afterbegin",
+        `
+                <div class="alert alert-primary" role="alert">
+                    ${res}, halaman akan ke dashboard!
+                </div>
+            `
+      );
+
+      setTimeout(() => {
+        window.location.href = "http://localhost:8000/list";
+      }, 2000);
     });
 
   e.preventDefault();
