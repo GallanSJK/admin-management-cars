@@ -63,29 +63,43 @@ async function init() {
     onEdit();
   }
 }
+
+function handleUpload(e) {
+  const image = e.target.files[0];
+  let formData = new FormData();
+
+  formData.append("image", image);
+  fetch("http://localhost:8000/api/uploads", {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      document.getElementById("foto").value = res.data;
+      document.getElementById("statusUpload").innerHTML = "Uploaded!";
+    });
+}
+
 function handleAdd(e) {
-  // const image = document.getElementById("file").files[0];
-  // const foto = document.getElementById("foto").value;
-  // const formData = new FormData(form);
-  // const value = Object.fromEntries(formData.entries());
-  // console.log(value);
+  const image = document.getElementById("file").files[0];
+  const foto = document.getElementById("foto");
   const inputNama = document.getElementById("inputNama");
   const inputSewa = document.getElementById("inputSewa");
   const inputSize = document.getElementById("inputSize");
-  const inputFoto = document.getElementById("inputFoto");
-  // if (image && !foto) {
-  //   console.log("wait for upload");
-  //   document.body.insertAdjacentHTML(
-  //     "afterbegin",
-  //     `
-  //           <div class="alert alert-warning alert-dismissible fade show " role="alert">
-  //               Silahkan tunggu upload!
-  //               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  //           </div>
-  //       `
-  //   );
-  //   return;
-  // }
+  if (image && !foto) {
+    console.log("wait for upload");
+    document.body.insertAdjacentHTML(
+      "afterbegin",
+      `
+            <div class="alert alert-warning alert-dismissible fade show " role="alert">
+                Silahkan tunggu upload!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        `
+    );
+    return;
+  }
 
   fetch("http://localhost:8000/api/v1/mobils/", {
     headers: { "Content-Type": "application/json" },
@@ -94,7 +108,7 @@ function handleAdd(e) {
       nama_mobil: inputNama.value,
       sewa: inputSewa.value,
       ukuran: inputSize.value,
-      foto: inputFoto.value,
+      foto: foto.value,
     }),
   })
     .then(function (res) {
@@ -158,29 +172,25 @@ function handleRegist(e) {
 }
 
 function handleEdit(e) {
-  // const image = document.getElementById("file").files[0];
-  // const foto = document.getElementById("foto").value;
-  // const formData = new FormData(form);
-  // const value = Object.fromEntries(formData.entries());
-  // console.log(value);
+  const image = document.getElementById("file").files[0];
+  const foto = document.getElementById("foto");
   const inputNama = document.getElementById("inputNama");
   const inputSewa = document.getElementById("inputSewa");
   const inputSize = document.getElementById("inputSize");
-  const inputFoto = document.getElementById("inputFoto");
   const id = document.getElementById("id");
-  // if (image && !foto) {
-  //   console.log("wait for upload");
-  //   document.body.insertAdjacentHTML(
-  //     "afterbegin",
-  //     `
-  //           <div class="alert alert-warning alert-dismissible fade show " role="alert">
-  //               Silahkan tunggu upload!
-  //               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  //           </div>
-  //       `
-  //   );
-  //   return;
-  // }
+  if (image && !foto) {
+    console.log("wait for upload");
+    document.body.insertAdjacentHTML(
+      "afterbegin",
+      `
+            <div class="alert alert-warning alert-dismissible fade show " role="alert">
+                Silahkan tunggu upload!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        `
+    );
+    return;
+  }
 
   fetch("http://localhost:8000/api/v1/mobils/" + id.value, {
     headers: { "Content-Type": "application/json" },
@@ -189,7 +199,7 @@ function handleEdit(e) {
       nama_mobil: inputNama.value,
       sewa: inputSewa.value,
       ukuran: inputSize.value,
-      foto: inputFoto.value,
+      foto: foto.value,
       id: id.value,
     }),
   })
