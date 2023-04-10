@@ -166,7 +166,7 @@ function handleRegist(e) {
 
       setTimeout(() => {
         window.location.href = "http://localhost:8000/";
-      }, 200000);
+      }, 2000);
     });
 
   e.preventDefault();
