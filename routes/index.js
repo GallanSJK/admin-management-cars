@@ -22,22 +22,54 @@ apiRouter.use("/api/uploads", controllers.api.upload.onUpload); // untuk upload 
 
 //endpoint API sequelize
 apiRouter.get("/api/v1/mobils", controllers.api.v1.mobilController.list); // get Mobil (ambil semua data mobil)
+// apiRouter.get(
+//   "/api/v1/mobils",
+//   controllers.api.v1.authController.authorize,
+//   controllers.api.v1.mobilController.list
+// ); // dengan authorize
+
 apiRouter.get(
   "/api/v1/mobils/:id",
   controllers.api.v1.mobilController.setMobil,
   controllers.api.v1.mobilController.show
 ); // get mobil/:id (ambil data mobil by id)
+// apiRouter.get(
+//   "/api/v1/mobils/:id",
+//   controllers.api.v1.authController.authorize,
+//   controllers.api.v1.mobilController.setMobil,
+//   controllers.api.v1.mobilController.show
+// ); // dengan authorize
+
 apiRouter.post("/api/v1/mobils", controllers.api.v1.mobilController.create); // post mobil (menambahkan data mobil)
+// apiRouter.post(
+//   "/api/v1/mobils",
+//   controllers.api.v1.authController.authorize,
+//   controllers.api.v1.mobilController.create
+// ); // dengan authorize
+
 apiRouter.put(
   "/api/v1/mobils/:id",
   controllers.api.v1.mobilController.setMobil,
   controllers.api.v1.mobilController.update
 ); // put mobil/:id (mengedit data mobil by id)
+// apiRouter.put(
+//   "/api/v1/mobils/:id",
+//   controllers.api.v1.authController.authorize,
+//   controllers.api.v1.mobilController.setMobil,
+//   controllers.api.v1.mobilController.update
+// ); // dengan authorize
+
 apiRouter.delete(
   "/api/v1/mobils/:id",
   controllers.api.v1.mobilController.setMobil,
   controllers.api.v1.mobilController.destroy
 ); // delete mobil/:id (delete data mobil by id)
+// apiRouter.delete(
+//   "/api/v1/mobils/:id",
+//   controllers.api.v1.authController.authorize,
+//   controllers.api.v1.mobilController.setMobil,
+//   controllers.api.v1.mobilController.destroy
+// ); // dengan authorize
 
 apiRouter.post("/api/v1/register", controllers.api.v1.authController.register); // post register (daftar user)
 apiRouter.post("/api/v1/login", controllers.api.v1.authController.login); // post login (melakukan login menggunakan email dan password)
